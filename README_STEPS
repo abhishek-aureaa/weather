@@ -1,0 +1,53 @@
+Prerequisite :
+1. Ubuntu 18(desktop version - mean desktop should already be installed).
+
+Commands to build the code : 
+1. git clone https://github.com/abhishek-aureaa/weather.git
+2. cd weather
+3. chmod +x ./build_weather_1.sh
+4. sudo dpkg --configure -a
+5. ./build_weather_1.sh 
+#Build might take upto 1 hour and the Msg should appear on the same linux console "Build Complete!!" 
+
+Good to have already : 
+1. curl is https enabled already : command 
+#curl -V 
+should show https
+2.cmake version should greater than or equal to 3. Though the build script will take care of installing it 
+command to check version : 
+#cmake -version
+
+Commands to run/test application/GUI
+1. cd ~/weather
+2. ./WeatherApp
+1. Enter City in the Edit Box : Enter City Name
+2. Press Button : Get Weather Details
+3. Press Button : Info
+4. Press Button : OK
+5. Click Cross(x) - to close window
+6. Repeat from Step 1 to 5 for details of another city
+
+Steps to check Full Weahther history :
+1. cd ~
+2. RUN THIS COMMAND :
+cat Weather_HISTORY_DATA.log | more
+3. Keep pressing ENTER key to keep moving down the data
+
+Other requirements expected : 
+Testing :
+1. There seems already existing quite a good unit testing suit. I am still exploring it further.
+e.g. ./Weather/to/hunter/root/Base/Source/Sober/Source/sober/network/api/unittest/OpenWeatherMap.cpp
+More can be found as :
+cd ~/weather
+find . | grep -i unit | grep -i test
+
+History Record.
+2. I planned to save it in the database(mysql). But could not get time to implement code & hence storing it in the file : Weather_HISTORY_DATA.log - in root directory
+3. Weather Forecast : 
+Could not get time to implement C++ code for : api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
+
+
+Other's Code I used : 
+1. https://github.com/ruslo/weather- which internally uses - https://github.com/ruslo/sober
+2. http://zetcode.com/gui/gtk2/gtkdialogs
+3. URLs referred - Quite a few of them from google, if needed, I can provide.
