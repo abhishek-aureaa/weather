@@ -3,8 +3,12 @@
 #...if the desktop is not already installed
 
 cd ~
+sudo dpkg --configure -a
 sudo apt-get update
 sudo apt-get install cmake -y
+
+sudo apt install libcanberra-gtk* -y
+sudo apt-get install libcanberra-gtk* -y
 #rm -rf ~/OhioLdapPlugin
 #rm -rf ~/weather
 #git clone https://github.com/abhishek-aurea/OhioLdapPlugin #need to give all permission to every one here
