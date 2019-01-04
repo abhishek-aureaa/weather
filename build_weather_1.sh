@@ -3,7 +3,6 @@
 #...if the desktop is not already installed
 
 cd ~
-sudo dpkg --configure -a
 sudo apt-get update
 sudo apt-get install cmake -y
 
