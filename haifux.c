@@ -1,126 +1,5 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
-#include<X11/Xlib.h>
-
-void show_info(GtkWidget *widget, gpointer window) {
-//void show_info(GtkWidget *widget, gpointer window, char* msg) {
-
-    char buffer[5000];
-    memset(buffer, '\0', 5000);
-    char temp[300];
-        memset(temp, '\0', 300);
-        int ret = 0;
-        //FILE* fp = fopen("/root/Weather/weather-1.2.0/_builds/weather.log", "r");
-        FILE* fp = fopen("./weather.log", "r");
-        while(ret != EOF)
-        {
-                memset(temp, '\0', 300);
-            ret = fscanf(fp, "%s", temp);
-                strcat(buffer, temp);
-                strcat(buffer, "\n");
-        }
-
-    
-  GtkWidget *dialog;
-  dialog = gtk_message_dialog_new(GTK_WINDOW(window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_INFO,
-            GTK_BUTTONS_OK,
-            buffer);
-            //"Download Completed\npppppp\nmmmmmm");
-           // "Download Completed");
-  gtk_window_set_title(GTK_WINDOW(dialog), "Information");
-  gtk_dialog_run(GTK_DIALOG(dialog));
-  gtk_widget_destroy(dialog);
-}
-
-void show_error(GtkWidget *widget, gpointer window) {
-    
-  GtkWidget *dialog;
-  dialog = gtk_message_dialog_new(GTK_WINDOW(window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_ERROR,
-            GTK_BUTTONS_OK,
-            "Error loading file");
-  gtk_window_set_title(GTK_WINDOW(dialog), "Error");
-  gtk_dialog_run(GTK_DIALOG(dialog));
-  gtk_widget_destroy(dialog);
-}
-
-void show_question(GtkWidget *widget, gpointer window) {
-    
-  GtkWidget *dialog;
-  dialog = gtk_message_dialog_new(GTK_WINDOW(window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_QUESTION,
-            GTK_BUTTONS_YES_NO,
-            "Are you sure to quit?");
-  gtk_window_set_title(GTK_WINDOW(dialog), "Question");
-  gtk_dialog_run(GTK_DIALOG(dialog));
-  gtk_widget_destroy(dialog);
-}
-
-void show_warning(GtkWidget *widget, gpointer window) {
-    
-  GtkWidget *dialog;
-  dialog = gtk_message_dialog_new(GTK_WINDOW(window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_WARNING,
-            GTK_BUTTONS_OK,
-            "Unallowed operation");
-  gtk_window_set_title(GTK_WINDOW(dialog), "Warning");
-  gtk_dialog_run(GTK_DIALOG(dialog));
-  gtk_widget_destroy(dialog);
-}
-
-//int main(int argc, char *argv[]) {
-int main1(int argc, char *argv[]) {
-//int main1() {
-
-  XInitThreads();
-
-  GtkWidget *window;
-  GtkWidget *table;
-
-  GtkWidget *info;
-  GtkWidget *warn;
-  GtkWidget *que;
-  GtkWidget *err;
-
-  gtk_init(&argc, &argv);
-
-  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-  gtk_window_set_default_size(GTK_WINDOW(window), 220, 150);
-  gtk_window_set_title(GTK_WINDOW(window), "Message dialogs");
-
-  table = gtk_table_new(2, 2, TRUE);
-  gtk_table_set_row_spacings(GTK_TABLE(table), 2);
-  gtk_table_set_col_spacings(GTK_TABLE(table), 2);
-
-  info = gtk_button_new_with_label("Info");
-
-  gtk_table_attach(GTK_TABLE(table), info, 0, 1, 0, 1, 
-      GTK_FILL, GTK_FILL, 3, 3);
-
-  gtk_container_add(GTK_CONTAINER(window), table);
-  gtk_container_set_border_width(GTK_CONTAINER(window), 15);
-
-
-  g_signal_connect(G_OBJECT(info), "clicked", 
-        //G_CALLBACK(show_info), (gpointer) window, "hellooo"); 
-        G_CALLBACK(show_info), (gpointer) window); 
-
-  g_signal_connect(G_OBJECT(window), "destroy",
-        G_CALLBACK(gtk_main_quit), G_OBJECT(window));
-
-  gtk_widget_show_all(window);
-
-  gtk_main();
-
-  return 0;
-}
-
 
 /*
  * callback event function for the gtk delete event. invoked
@@ -189,13 +68,11 @@ void  execute(char* city)
      pid_t  pid1;
      int    status;
 
-#if 0
      if ((pid = fork()) < 0) {     /* fork a child process           */
           printf("*** ERROR: forking child process failed\n");
           exit(1);
      }
      else if (pid == 0) {          /* for the child process:         */
-#endif 
           //if (execvp(*argv, argv) < 0) {     /* execute the command  */
 	  /*
           if (execl("./lm", "lm", "clearactivation", 0);
@@ -233,16 +110,13 @@ void  execute(char* city)
           //system("/root/Weather/weather-1.2.0/_builds/weather.sh Berlin");
           //system("/root/defaultbutton");
           //system("/root/gtk-dlg");
-          //system("./gtk-dlg");
-	  main1(1,"weather");
+          system("./gtk-dlg");
 
-#if 0
      }
      else {                                  /* for the parent:      */
           while (wait(&status) != pid)       /* wait for completion  */
                ;
      }
-#endif
 
 #if 0
      if ((pid1 = fork()) < 0) {     /* fork a child process           */
@@ -272,7 +146,6 @@ void  execute(char* city)
 int
 main(int argc, char* argv[])
 {
-    XInitThreads();
     /* this variable will store a pointer to the window object. */
     GtkWidget* main_window;
     /* this will store a horizontal box. */

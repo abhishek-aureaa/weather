@@ -5,9 +5,6 @@
 cd ~
 sudo apt-get update
 sudo apt-get install cmake -y
-
-sudo apt install libcanberra-gtk* -y
-sudo apt-get install libcanberra-gtk* -y
 #rm -rf ~/OhioLdapPlugin
 #rm -rf ~/weather
 #git clone https://github.com/abhishek-aurea/OhioLdapPlugin #need to give all permission to every one here
@@ -104,7 +101,7 @@ cd ~
 #echo 'cd ${PWD}/_builds/' > ./weather.sh 
 #export a=`expr $PWD`
 #echo 'cd ${a}/_builds/' > ./weather.sh 
-echo 'cd ~/Weather/weather-1.2.0/_builds' > ./weather.sh 
+echo 'cd ~/weather/Weather/weather-1.2.0/_builds' > ./weather.sh 
 echo './weather-cli $1 > ~/weather.log' >> ./weather.sh 
 echo './weather-cli $1 >> ~/Weather_HISTORY_DATA.log' >> ./weather.sh 
 echo 'echo '########################################' >> ~/Weather_HISTORY_DATA.log' >> ./weather.sh 
